@@ -1,0 +1,1 @@
+nohup time -p hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns=HBASE_ROW_KEY,data:rs_ids,data:ref,data:alts,data:sample_count,data:total_read_depth,data:avg_read_depth,data:create_ts,data:update_ts,data:overall,data:source,data:ethnicity,data:country,data:province,data:age,data:gender pvfd /user/xiaopeng2/PVFD/2.0 1>$0.o 2>$0.e &

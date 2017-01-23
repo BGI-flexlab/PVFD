@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>PVFD | Statistics</title>
+
+    <link href="/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/common.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/jquery-confirm.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/javascripts/jquery-confirm.min.js"></script>
+    <script src="/javascripts/function.js"></script>
+    <script src="/javascripts/echarts.min.js"></script>
+
+</head>
+<body>
+
+<div id="wrapper" class="clearfix">
+
+    <header id="header" class="medicom-header medical-nav">
+        <div class="fillline"></div>
+        <div class="container">
+
+            <!-- Primary Navigation
+            ============================================= -->
+            <nav class="navbar navbar-default" role="navigation">
+
+                <!-- Brand and toggle get grouped for better mobile display
+                ============================================= -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#primary-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="javascript:void(0);"></a>
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right" id="primary-nav">
+                    <ul class="nav navbar-nav">
+                        <li class="">
+                            <a href="/"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li class="">
+                            <a href="/data/index"><i class="fa fa-search"></i> Data</a>
+                        </li>
+                        <li class="active">
+                            <a href="/stat"><i class="fa fa-bar-chart-o"></i> Statistics</a>
+                        </li>
+                        <li class="">
+                            <a href="/about"><i class="fa fa-info-circle"></i> About</a>
+                        </li>
+                        <li class="">
+                            <a href="/faq"><i class="fa fa-question-circle-o"></i> FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main">
+        <div class="main_top">
+            <div class="main_top_desc_div">
+                <h3 id="target_h3">Statistics</h3>
+            </div>
+        </div>
+
+        <div class="main_mid">
+            <div class="main_mid_div">
+                <div>
+                    <div>
+
+                    </div>
+                </div>
+                <div>
+                    <div id="stat_bar" style="width: 100%;min-height: 500px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+<script>
+
+    $(document).ready(function(){
+        fillGraph();
+
+    });
+
+    function fillGraph(){
+        $.get("/sampleCount",function(data){
+            if (data.code == 1){
+                var list = data.data;
+                var pop_names = [];
+                var pop_values = [];
+                var map = {};
+                list.forEach(function(pop){
+                    var pop_name = pop[0];
+                    var pop_sample = pop[1];
+                    if (pop_name == "."){
+
+                    }else{
+                        pop_names.push(pop_name);
+                        map[pop_name] = pop_sample;
+                    }
+                });
+                pop_names = pop_names.sort();
+                pop_names.forEach(function(name){
+                    pop_values.push(map[name]);
+                });
+                var chart = echarts.init(document.getElementById('stat_bar'));
+
+                // 指定图表的配置项和数据
+                var statOption = {
+                    title: {
+                        text: '	Population Statistics',
+                        subtext:'Distribution of our samples in different population.',
+                        x:"center"
+                    },
+                    tooltip: {},
+                    legend: {
+                        data:['Number of samples'],
+                        y:"bottom"
+                    },
+                    xAxis: {
+                        data: pop_names,
+                        name:"Population"
+                    },
+                    yAxis: {
+                        name:"Number of samples"
+                    },
+                    series: [{
+                        name: 'Number of samples',
+                        type: 'bar',
+                        data: pop_values
+                    }]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                chart.setOption(statOption);
+
+            }
+        });
+    }
+
+
+    $(".navbar-nav li a").hover(function(){
+        if ($(this).parent("li").hasClass("active")){
+            return false;
+        }
+        $(this).children("i").css("visibility","visible");
+    },function(){
+        if ($(this).parent("li").hasClass("active")){
+            return false;
+        }
+        $(this).children("i").css("visibility","hidden");
+    });
+
+</script>
+</html>

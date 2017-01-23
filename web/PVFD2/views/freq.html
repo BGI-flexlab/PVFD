@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>PVFD | DATA</title>
+
+    <link href="/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/common.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/jquery-confirm.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/javascripts/jquery-confirm.min.js"></script>
+    <script src="/javascripts/function.js"></script>
+    <script src="/javascripts/echarts.min.js"></script>
+
+</head>
+<body style="min-height: 600px;min-width: 800px;overflow: auto;">
+
+<div id="wrapper" class="clearfix">
+
+    <header id="header" class="medicom-header medical-nav">
+        <div class="fillline"></div>
+        <div class="container">
+
+            <!-- Primary Navigation
+            ============================================= -->
+            <nav class="navbar navbar-default" role="navigation">
+
+                <!-- Brand and toggle get grouped for better mobile display
+                ============================================= -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#primary-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="javascript:void(0);"></a>
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right" id="primary-nav">
+                    <ul class="nav navbar-nav">
+                        <li class="">
+                            <a href="/"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li class="active">
+                            <a href="#"><i class="fa fa-search"></i> Data</a>
+                        </li>
+                        <li class="">
+                            <a href="/stat"><i class="fa fa-bar-chart-o"></i> Statistics</a>
+                        </li>
+                        <li class="">
+                            <a href="/about"><i class="fa fa-info-circle"></i> About</a>
+                        </li>
+                        <li class="">
+                            <a href="/faq"><i class="fa fa-question-circle-o"></i> FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main">
+        <div class="main_top">
+            <div class="main_top_desc_div">
+                <h3 id="target_h3">TARGET : </h3>
+            </div>
+        </div>
+
+        <div id="freq_search_div">
+            <div>
+               <div class="input-group" style="width: 70%;">
+                   <input id="search_input" type="text" class="form-control" placeholder="Search..." >
+                   <span class="input-group-btn">
+                       <button id="search_btn" class="btn btn-default" type="button">Go!</button>
+                   </span>
+               </div>
+                <div class="search_example">
+                    Example:
+                    <a class="example_a">chr1-100133181</a>
+                    ,
+                    <a class="example_a">rs1338576</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main_mid">
+            <div class="main_mid_div">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="bottom10">
+                            <div class="blockTitleDiv" style="background-color: #3a4450">
+                                <span><i class="fa fa-th-list"></i> Detail</span>
+                            </div>
+                            <div class="blockContentDiv" style="display: block;background-color: #f0f0f0">
+                                <div class="block" id="basicinfoBlock">
+                                    <div class=".table-responsive">
+                                    <table class="table">
+                                        <thead></thead>
+                                        <tbody id="detail_body"></tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div style="overflow-x: auto">
+                            <div class="tabbable tabs-right">
+                                <ul class="nav nav-tabs myTab">
+                                    <li role="presentation" class="active"><a tar="pop_stat_div" href="#pop_stat_div" data-toggle="tab"><b>Population</b></a></li>
+                                    <li role="presentation" class=""><a tar="coun_stat_div" href="#coun_stat_div" data-toggle="tab"><b>Country</b></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="pop_stat_div">
+                                        <div class="">
+                                            <div class="blockTitleDiv" style="background-color: #3a4450">
+                                                <span><i class="fa fa-bar-chart"></i> Population Statistics</span>
+                                            </div>
+                                            <div class="blockContentDiv" style="display: block;background-color: #f0f0f0">
+                                                <div id="pop_stat" class="sample_chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="coun_stat_div">
+                                        <div class="">
+                                            <div class="blockTitleDiv" style="background-color: #3a4450">
+                                                <span><i class="fa fa-bar-chart"></i> Country Statistics</span>
+                                            </div>
+                                            <div class="blockContentDiv" style="display: block;background-color: #f0f0f0">
+                                                <div id="coun_stat" class="sample_chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="top10">
+                    <div>
+                        <div style="overflow-x: auto">
+                            <div class="graphs">
+                                <div class="tabbable tabs-right">
+                                    <ul class="nav nav-tabs myTab">
+                                        <li role="presentation" class="active"><a tar="pop_stat_div" href="#pop_tbl_div" data-toggle="tab"><b>Population</b></a></li>
+                                        <li role="presentation" class=""><a tar="coun_stat_div" href="#coun_tbl_div" data-toggle="tab"><b>Country</b></a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="pop_tbl_div">
+                                            <div class="">
+                                                <div class="blockTitleDiv" style="background-color: #3a4450">
+                                                    <span><i class="fa fa-th"></i> Population Table</span>
+                                                </div>
+                                                <div class="blockContentDiv" style="display: block;background-color: #f0f0f0">
+                                                    <div class=".table-responsive">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Population</th>
+                                                                <th>Allele Count</th>
+                                                                <th>Allele Sum</th>
+                                                                <th>Allele Frequency</th>
+                                                                <th>Genotype</th>
+                                                                <th>Genotype Frequency</th>
+                                                                <th>Genotype</th>
+                                                                <th>Genotype Frequency</th>
+                                                                <th>Genotype</th>
+                                                                <th>Genotype Frequency</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="pop_tbody"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="coun_tbl_div">
+                                            <div class="">
+                                                <div class="blockTitleDiv" style="background-color: #3a4450">
+                                                    <span><i class="fa fa-th"></i> Country Table</span>
+                                                </div>
+                                                <div class="blockContentDiv" style="display: block;background-color: #f0f0f0">
+                                                    <div class=".table-responsive">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Country</th>
+                                                                <th>Allele Count</th>
+                                                                <th>Allele Sum</th>
+                                                                <th>Allele Frequency</th>
+                                                                <th>Genotype</th>
+                                                                <th>Genotype Frequency</th>
+                                                                <th>Genotype</th>
+                                                                <th>Genotype Frequency</th>
+                                                                <th>Genotype</th>
+                                                                <th>Genotype Frequency</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="coun_tbody"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+
+<script>
+
+    var value = "<%- value %>";
+
+    $(document).ready(function(){
+        if (value != "index"){
+            $("#search_input").val(value);
+            $("#search_btn").trigger("click");
+        }
+    });
+
+    var populationChart = echarts.init(document.getElementById('pop_stat'));
+    var countryChart = echarts.init(document.getElementById('coun_stat'));
+
+//    $('#myTab a').click(function (e) {
+//        e.preventDefault();//阻止a链接的跳转行为
+//        var tar = $(this).prop("tar");
+//        alert(tar);
+//        $("#"+tar).tab('show');//显示当前选中的链接及关联的content
+//    });
+
+    $(".navbar-nav li a").hover(function(){
+        if ($(this).parent("li").hasClass("active")){
+            return false;
+        }
+        $(this).children("i").css("visibility","visible");
+    },function(){
+        if ($(this).parent("li").hasClass("active")){
+            return false;
+        }
+        $(this).children("i").css("visibility","hidden");
+    });
+
+    $('#search_btn').click(function(){
+        var text = $('#search_input').val();
+        text = $.trim(text);
+        if (isEmpty(text)){
+            $('#search_input').focus();
+            return false;
+        }
+        $('#target_h3').text("TARGET : "+text);
+        $.post('/findByKeyWord',{q:text},function(data){
+            if (data.code == 1){
+                alert(JSON.stringify(data,2,2));
+                var freq = data.data;
+                var chrpos = freq.chrPos;
+                var rsid = freq.rsID;
+                var ref = freq.ref;
+                var alt = freq.alt;
+                var sampleCount = freq.sampleCount;
+                var totalReadDepth = freq.totalReadDepth;
+                var avgReadDepth = freq.avgReadDepth;
+                var frequency = freq.frequency;
+//                var project = freq.project;
+                var population = freq.population;
+                var country = freq.country;
+//                var province = freq.province;
+//                var age = freq.age;
+//                var gender = freq.gender;
+
+                var table_html = '<tr><td>Chr-Pos</td><td>'+chrpos+'</td></tr>';
+                table_html += '<tr><td>dbSNP</td><td>'+rsid+'</td></tr>';
+                table_html += '<tr><td>Ref</td><td>'+ref+'</td></tr>';
+                table_html += '<tr><td>Alt</td><td>'+alt+'</td></tr>';
+                table_html += '<tr><td>Sample Count</td><td>'+sampleCount+'</td></tr>';
+                table_html += '<tr><td>Total Read Depth</td><td>'+totalReadDepth+'</td></tr>';
+                table_html += '<tr><td>Average Read Depth</td><td>'+avgReadDepth+'</td></tr>';
+                $('#detail_body').empty();
+                $('#detail_body').append(table_html);
+
+                //population & country
+
+                var populationLabel = [];
+                var populationSource1 = [];
+                var populationSource2 = [];
+                dealAlleleCount(ref,population,populationSource1,populationSource2,populationLabel);
+                var countryLabel = [];
+                var countrySource1 = [];
+                var countrySource2 = [];
+                dealAlleleCount(ref,country,countrySource1,countrySource2,countryLabel);
+                alert("alert1:"+JSON.stringify(countrySource1,2,2));
+                var popOption = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    legend: {
+                        data:['Allele Number','Frequency']
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: populationLabel
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: 'Allele Number',
+//                            interval: 50,
+//                            axisLabel: {
+//                                formatter: '{value} ml'
+//                            }
+                        },
+                        {
+                            type: 'value',
+                            name: 'Frequency',
+//                            min: 0,
+//                            max: 25,
+//                            interval: 5,
+                            axisLabel: {
+                                formatter: '{value} %'
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name:'Allele Number',
+                            type:'bar',
+                            data:populationSource1
+                        },
+                        {
+                            name:'Frequency',
+                            type:'line',
+                            yAxisIndex: 1,
+                            data:populationSource2
+                        }
+                    ]
+                };
+                populationChart.setOption(popOption);
+
+                var countryOption = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    legend: {
+                        data:['Allele Number','Frequency']
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: countryLabel
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: 'Allele Number',
+//                            interval: 50,
+//                            axisLabel: {
+//                                formatter: '{value} ml'
+//                            }
+                        },
+                        {
+                            type: 'value',
+                            name: 'Frequency',
+//                            min: 0,
+//                            max: 25,
+//                            interval: 5,
+                            axisLabel: {
+                                formatter: '{value} %'
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name:'Allele Number',
+                            type:'bar',
+                            data:countrySource1
+                        },
+                        {
+                            name:'Frequency',
+                            type:'line',
+                            yAxisIndex: 1,
+                            data:countrySource2
+                        }
+                    ]
+                };
+                countryChart.setOption(countryOption);
+
+                var popJson = JSON.parse(population);
+                var pop_table_html_arr = [];
+                for (var p in popJson){
+                    var pop_table_html = '';
+                    var json_value = popJson[p];
+                    var alleles = json_value["alleles"];
+                    var allele = alleles[ref];
+                    var allele_count = allele["count"];
+                    var allele_freq = allele["frequency"];
+                    var allele_sum = json_value["totalAlleleCount"];
+                    var genotypes = json_value["genotypes"];
+//                    var genotype_str = "";
+//                    var genotype_freq_str = "";
+//                    for (var geno in genotypes){
+//                        var geno_fix = geno.replace("_","|");
+//                        genotype_str += geno_fix +",";
+//                        var geno_value = genotypes[geno];
+//                        var geno_freq = geno_value["frequency"];
+//                        genotype_freq_str += geno_freq + ",";
+//                    }
+//                    if (genotype_str.endWith(",")){
+//                        genotype_str = genotype_str.substr(0,genotype_str.length-1);
+//                    }
+//                    if (genotype_freq_str.endWith(",")){
+//                        genotype_freq_str = genotype_freq_str.substr(0,genotype_freq_str.length-1);
+//                    }
+                    pop_table_html += '<tr><td>' + p +'</td>';
+                    pop_table_html += '<td>' + allele_count +'</td>';
+                    pop_table_html += '<td>' + allele_sum +'</td>';
+                    pop_table_html += '<td>' + allele_freq +'</td>';
+                    for (var geno in genotypes){
+                        var geno_fix = geno.replace("_"," | ");
+                        var geno_value = genotypes[geno];
+                        var geno_freq = geno_value["frequency"];
+                        pop_table_html += '<td>' + geno_fix +'</td>';
+                        pop_table_html += '<td>' + geno_freq +'</td>';
+                    }
+                    if (Object.getOwnPropertyNames(genotypes).length == 2){
+                        pop_table_html += '<td>' + '</td>';
+                        pop_table_html += '<td>' + '</td>';
+                    }
+                    if (Object.getOwnPropertyNames(genotypes).length == 1){
+                        pop_table_html += '<td>' + '</td>';
+                        pop_table_html += '<td>' + '</td>';
+                        pop_table_html += '<td>' + '</td>';
+                        pop_table_html += '<td>' + '</td>';
+                    }
+                    pop_table_html += '</tr>';
+                    pop_table_html_arr.push(pop_table_html);
+                }
+                $('#pop_tbody').empty();
+                pop_table_html_arr = pop_table_html_arr.sort();
+                pop_table_html_arr.forEach(function(tr){
+                    $('#pop_tbody').append(tr);
+                });
+
+//                var totalMaf = dealTotalMAF(frequency);
+//                var popMafLabel = [];
+//                var popMafSource = [];
+//                dealPopMAF(population,popMafSource,popMafLabel);
+//                var totalMafObj = {};
+//                totalMafObj["name"] = "Total";
+//                totalMafObj["value"] = totalMaf*100;
+//                popMafLabel.push("Total");
+//                popMafSource.push(totalMafObj);
+
+                var counJson = JSON.parse(country);
+                var coun_table_html_arr = [];
+                for (var c in counJson){
+                    var coun_table_html = '';
+                    var json_value = counJson[c];
+                    var alleles = json_value["alleles"];
+                    var allele = alleles[ref];
+                    var allele_count = allele["count"];
+                    var allele_freq = allele["frequency"];
+                    var allele_sum = json_value["totalAlleleCount"];
+                    var genotypes = json_value["genotypes"];
+//                    var genotype_str = "";
+//                    var genotype_freq_str = "";
+//                    for (var geno in genotypes){
+//                        var geno_fix = geno.replace("_","|");
+//                        genotype_str += geno_fix +",";
+//                        var geno_value = genotypes[geno];
+//                        var geno_freq = geno_value["frequency"];
+//                        genotype_freq_str += geno_freq + ",";
+//                    }
+//                    if (genotype_str.endWith(",")){
+//                        genotype_str = genotype_str.substr(0,genotype_str.length-1);
+//                    }
+//                    if (genotype_freq_str.endWith(",")){
+//                        genotype_freq_str = genotype_freq_str.substr(0,genotype_freq_str.length-1);
+//                    }
+                    coun_table_html += '<tr><td>' + c +'</td>';
+                    coun_table_html += '<td>' + allele_count +'</td>';
+                    coun_table_html += '<td>' + allele_sum +'</td>';
+                    coun_table_html += '<td>' + allele_freq +'</td>';
+                    for (var geno in genotypes){
+                        var geno_fix = geno.replace("_"," | ");
+                        var geno_value = genotypes[geno];
+                        var geno_freq = geno_value["frequency"];
+                        coun_table_html += '<td>' + geno_fix +'</td>';
+                        coun_table_html += '<td>' + geno_freq +'</td>';
+                    }
+                    if (Object.getOwnPropertyNames(genotypes).length == 2){
+                        coun_table_html += '<td>' + '</td>';
+                        coun_table_html += '<td>' + '</td>';
+                    }
+                    if (Object.getOwnPropertyNames(genotypes).length == 1){
+                        coun_table_html += '<td>' + '</td>';
+                        coun_table_html += '<td>' + '</td>';
+                        coun_table_html += '<td>' + '</td>';
+                        coun_table_html += '<td>' + '</td>';
+                    }
+                    coun_table_html += '</tr>';
+                    coun_table_html_arr.push(coun_table_html);
+                }
+                coun_table_html_arr.sort();
+                $('#coun_tbody').empty();
+                coun_table_html_arr.forEach(function(tr){
+                    $('#coun_tbody').append(tr);
+                });
+
+            }else if (data.code == 2){
+                notice("Notice","No data found!");
+            }else{//error
+                notice("Error","Input format wrong");
+            }
+
+        });
+
+    });
+
+    $('.example_a').click(function(){
+        $('#search_input').val($(this).text());
+        $('#search_btn').trigger('click');
+    });
+
+    function notice(title,content){
+        $.confirm({
+            title:title,
+            content:content,
+            cancelButton:false,
+            autoClose:'confirm|2000'
+        });
+    }
+
+</script>
+</html>

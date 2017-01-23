@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>PVFD | HOME</title>
+
+    <link href="/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/common.css" rel="stylesheet">
+    <link href="/stylesheets/index.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/jquery-confirm.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/javascripts/jquery-confirm.min.js"></script>
+    <script src="/javascripts/function.js"></script>
+
+    <style>
+        body {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+        }
+        h3 a{
+            color: #333;
+        }
+        .db_name{
+            font-family:"Segoe UI", "PT Sans", "Open Sans", Arial, 'Microsoft Yahei', 'Hiragino Sans GB', 'WenQuanYi Zen Hei Mono', sans-serif;
+        }
+
+        .tooltip.in, .tooltip-inner {
+            max-width: none;
+            width: auto;
+        }
+
+        /*.navbar-brand img {*/
+            /*width: 140px;*/
+        /*}*/
+
+        /*input{*/
+            /*height: 42px!important;*/
+        /*}*/
+
+
+    </style>
+</head>
+<body>
+
+<div id="wrapper" class="clearfix">
+
+    <header id="header" class="medicom-header medical-nav">
+        <div class="fillline"></div>
+        <div class="container">
+
+            <!-- Primary Navigation
+            ============================================= -->
+            <nav class="navbar navbar-default" role="navigation">
+
+                <!-- Brand and toggle get grouped for better mobile display
+                ============================================= -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#primary-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="javascript:void(0);"></a>
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right" id="primary-nav">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/"><i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li class="">
+                            <a href="/data/index"><i class="fa fa-search"></i> Data</a>
+                        </li>
+                        <li class="">
+                            <a href="/stat"><i class="fa fa-bar-chart-o"></i> Statistics</a>
+                        </li>
+                        <li class="">
+                            <a href="/about"><i class="fa fa-info-circle"></i> About</a>
+                        </li>
+                        <li class="">
+                            <a href="/faq"><i class="fa fa-question-circle-o"></i> FAQ</a>
+                        </li>
+                        <!--<li class="dropdown">-->
+                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i>Coming soon</a>-->
+                        <!--<ul class="dropdown-menu">-->
+                        <!--<li><a href="">Analyze</a></li>-->
+                        <!--<li><a href="">Download</a></li>-->
+                        <!--<li><a href="">Upload</a></li>-->
+                        <!--</ul>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main">
+        <div id="bg">
+            <div class="cap"></div>
+            <div class="">
+                <div class="row centerBlock">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="adBlock">
+                            <h1>
+                                <strong>
+                                <span style=""><span class="db_name" style="font-size:60px;color: #fff">
+                                Population Variation Frequency Database</span></span>
+                                </strong>
+                            </h1>
+                        </div>
+
+                        <div class="descDiv">
+                            <p style="font-size: 16px;line-height: 1.5;">
+                                <!--PVFD（Population Variation Frequency Database）是人群突变频率数据库，该数据库中记录了人类全基因组范围内各位点的突变频率信息，以及与变异数据相关的样本、表型、种族等重要信息。-->
+                                PVFD is short for 'Population Variation Frequency Database'.Records in the database of all sites within the human genome mutation frequency information and samples related with the variation of data, phenotype, race and other important information.
+                            </p>
+                        </div>
+
+                        <div class="searchDiv">
+                            <div>
+                                <div class="input-group" style="width: 70%;margin: 0 auto;">
+                                    <input id="search_input" type="text" class="form-control" placeholder="Search..." >
+                                <span class="input-group-btn">
+                                    <button id="search_btn" class="btn btn-default" type="button">Go!</button>
+                                </span>
+                                </div>
+                                <div class="search_example">
+                                    Example:
+                                    <a class="example_a">chr1-100133181</a>
+                                    ,
+                                    <a class="example_a">rs1338576</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="pointsRule">-->
+
+                        <!--<ul>-->
+                        <!--<li style="background-color: #FFCC66;"><a href="/sample"><span>Sample Filter</span><i style="background-color: #FFCC66;"></i></a></li>-->
+                        <!--<li style="background-color: #CC9999;"><a href="/gene"><span>Gene Filter</span><i style="background-color: #CC9999;"></i></a></li>-->
+                        <!--<li style="background-color: #CCCCCC;"><a><span>Analysis</span><i style="background-color: #CCCCCC;"></i></a></li>-->
+                        <!--</ul>-->
+                        <!--</div>-->
+                    </div>
+
+    </div>
+
+
+</div>
+        </div>
+    </div>
+
+    <div id="FooterAll" class="row" style="position:fixed; left:0; bottom:0;right: 0;">
+        <footer>
+            <div class="footer" style="width: 100%; background-color: black; padding: 10px 0;;position: relative; bottom: 0;">
+                <div class="container">
+                    <div class="grid no-margin">
+                        <div class="row no-margin">
+                            <p style="text-align:center;color:white"><img src="/images/logo.png" alt="BGI"><b>Copyright &copy 2014-2016</b></p>
+                        </div>
+                    </div>
+                    <div style="float: right;padding-right: 150px;margin-top:-30px;">
+                        <a href="mailto:P_it_bigdata@genomics.cn"><i class="fa fa-envelope"></i> 大数据中心</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    </div>
+</body>
+
+<script>
+
+
+    $('#search_btn').click(function(){
+        var text = $('#search_input').val();
+        if (isEmpty(text)){
+            $('#search_input').focus();
+            return false;
+        }else{
+            window.location.href = "/data/"+text;
+        }
+
+
+    });
+
+    $('.example_a').click(function(){
+        window.location.href = "/data/"+$(this).text();
+
+    });
+
+
+
+
+    $(".navbar-nav li a").hover(function(){
+        if ($(this).parent("li").hasClass("active")){
+            return false;
+        }
+        $(this).children("i").css("visibility","visible");
+    },function(){
+        if ($(this).parent("li").hasClass("active")){
+            return false;
+        }
+        $(this).children("i").css("visibility","hidden");
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,11 @@
+No Arguments Given!
+Usage: $HADOOP_PREFIX/bin/hadoop jar hadoop-streaming.jar [options]
+Options:
+  dumptb <glob-pattern> Dumps all files that match the given pattern to 
+                        standard output as typed bytes.
+  loadtb <path> Reads typed bytes from standard input and stores them in
+                a sequence file in the specified path
+  [streamjob] <args> Runs streaming job with given arguments
+real 0.65
+user 0.53
+sys 0.08
